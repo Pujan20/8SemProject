@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport name="GroupedByAgeAndLocation" language="java" columnCount="1">
+    <!-- Define your data source -->
+    <queryString>
+        <![CDATA[SELECT * FROM person ORDER BY age, location]]>
+    </queryString>
+
+    <!-- Define report fields -->
+    <field name="id" class="java.lang.Integer"/>
+    <field name="firstname" class="java.lang.String"/>
+    <field name="lastname" class="java.lang.String"/>
+    <field name="age" class="java.lang.Integer"/>
+    <field name="location" class="java.lang.String"/>
+
+    <!-- Define table column headers -->
+    <columnHeader>
+        <band height="30">
+            <staticText>
+                <reportElement x="0" y="0" width="80" height="30"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="80" y="0" width="80" height="30"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[First Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="160" y="0" width="80" height="30"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Last Name]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="240" y="0" width="80" height="30"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Age]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="320" y="0" width="80" height="30"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Location]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <!-- Define table details -->
+    <detail>
+        <band height="20">
+            <textField>
+                <reportElement x="0" y="0" width="80" height="20"/>
+                <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="80" y="0" width="80" height="20"/>
+                <textFieldExpression><![CDATA[$F{firstname}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="160" y="0" width="80" height="20"/>
+                <textFieldExpression><![CDATA[$F{lastname}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="240" y="0" width="80" height="20"/>
+                <textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="320" y="0" width="80" height="20"/>
+                <textFieldExpression><![CDATA[$F{location}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <!-- Define grouping by age and location -->
+    <group name="GroupByAge">
+        <groupExpression><![CDATA[$F{age}]]></groupExpression>
+        <groupHeader>
+            <band height="20">
+                <textField>
+                    <reportElement x="0" y="0" width="400" height="20"/>
+                    <textFieldExpression><![CDATA["Age: " + $F{age}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="10"/>
+        </groupFooter>
+    </group>
+
+    <group name="GroupByLocation">
+        <groupExpression><![CDATA[$F{location}]]></groupExpression>
+        <groupHeader>
+            <band height="20">
+                <textField>
+                    <reportElement x="0" y="0" width="400" height="20"/>
+                    <textFieldExpression><![CDATA["Location: " + $F{location}]]></textFieldExpression>
+                </textField>
+            </band>
+        </groupHeader>
+        <groupFooter>
+            <band height="10"/>
+        </groupFooter>
+    </group>
+</jasperReport>
